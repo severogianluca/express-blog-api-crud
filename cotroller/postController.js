@@ -13,7 +13,11 @@ function getById (req, res){
     const resultId = posts.find((element) => element.id === id);
 
     if (!resultId) {
-        return res.status(404).json({ error: "Post non trovato" });
+        return res.status(404).json({
+            status: 404,
+            error: "Not Found",
+            message: "Post non trovato"
+         });
     }
 
     res.json(resultId)
@@ -38,8 +42,21 @@ function update (req, res){
 //DELETE
 function destroy (req, res){
 
-    console.log('stai eliminando l/oggetto ' + req.params.slug)
-    res.send('stai eliminando l/oggetto ' + req.params.slug)
+    const id = parseInt(req.params.id);
+    const index = posts.findIndex((element) => element.id === id);
+
+    if (index < 0) {
+        return res.status(404).json({
+            status: 404,
+            error: "Not Found",
+            message: "Post non trovato"
+         });
+    }
+
+
+    posts.splice(index, 1);
+    console.log(posts);
+    res.json(`Hai eliminato con successo il post con ID: ${id}`)
 }
 
 module.exports = {getList, getById, insert, update, destroy}
