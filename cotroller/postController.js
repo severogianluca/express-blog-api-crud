@@ -56,7 +56,11 @@ function destroy (req, res){
 
     posts.splice(index, 1);
     console.log(posts);
-    res.json(`Hai eliminato con successo il post con ID: ${id}`)
+    res.json({
+        status: "approvato",
+        message: `Hai eliminato con successo il post con ID: ${id}`,
+        updatedPosts: posts
+    });
 }
 
 module.exports = {getList, getById, insert, update, destroy}
