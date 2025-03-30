@@ -1,6 +1,4 @@
-const express = require("express")
 const posts = require ("../data/postsList")
-
 
 
 // INDEX
@@ -20,11 +18,28 @@ function getById (req, res){
 
     res.json(resultId)
 }
+
+
 // STORE
-function insert (req, res){}
+function insert (req, res){
+    console.log('hai creato l/oggetto ' + req.params)
+    res.send('hai creato l/oggetto ' + req.params)
+}
+
+
 //UPDATE
-function update (req, res){}
+function update (req, res){
+    console.log('stai modificando l/oggetto ' + req.params.id)
+    
+    res.send('stai modificando l/oggetto ' + req.params.id)
+}
+
+
 //DELETE
-function destroy (req, res){}
+function destroy (req, res){
+
+    console.log('stai eliminando l/oggetto ' + req.params.slug)
+    res.send('stai eliminando l/oggetto ' + req.params.slug)
+}
 
 module.exports = {getList, getById, insert, update, destroy}
