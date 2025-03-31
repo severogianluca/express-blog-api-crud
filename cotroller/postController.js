@@ -1,4 +1,3 @@
-const { title } = require("process");
 const posts = require ("../data/postsList")
 
 
@@ -63,7 +62,10 @@ function update (req, res){
     resultId.tags = req.body.tags
 
     console.log(posts)
-    res.json(resultId)
+    res.json({
+        message: `Hai modificato con successo il post con ID: ${id}`,
+        updatedPosts: resultId 
+    })
 }
 
 
