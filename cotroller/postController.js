@@ -1,3 +1,4 @@
+const { title } = require("process");
 const posts = require ("../data/postsList")
 
 
@@ -26,8 +27,20 @@ function getById (req, res){
 
 // STORE
 function insert (req, res){
-    console.log('hai creato l/oggetto ' + req.params)
-    res.send('hai creato l/oggetto ' + req.params)
+    const newId = posts[posts.length - 1].id + 1;
+    const newPost = {
+        
+        id:  newId,
+        // title: req.body.title,
+        content:req.body.content,
+        // image: req.body.image,
+        tags: req.body.tags
+    }
+    
+    posts.push(newPost)
+    console.log(posts)
+
+    res.status(201).json(newPost);
 }
 
 
