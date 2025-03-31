@@ -31,7 +31,7 @@ function insert (req, res){
     const newPost = {
         
         id:  newId,
-        // title: req.body.title,
+        title: req.body.title,
         content:req.body.content,
         // image: req.body.image,
         tags: req.body.tags
@@ -46,9 +46,24 @@ function insert (req, res){
 
 //UPDATE
 function update (req, res){
-    console.log('stai modificando l/oggetto ' + req.params.id)
+    const id = parseInt(req.params.id);
+    const resultId = posts.find((element) => element.id === id);
     
-    res.send('stai modificando l/oggetto ' + req.params.id)
+    if (!resultId) {
+        return res.status(404).json({
+            status: 404,
+            error: "Not Found",
+            message: "Post non trovato"
+         });
+    }
+
+    resultId.title = req.body.title
+    resultId.content = req.body.content
+    // post.image= req.body.image
+    resultId.tags = req.body.tags
+
+    console.log(posts)
+    res.json(resultId)
 }
 
 
