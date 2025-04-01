@@ -1,14 +1,14 @@
-const posts = require ("../data/postsList")
+const posts = require("../data/postsList")
 const notFound = require("../middleweres/errorNotFound")
 
 
 // INDEX
-function getList (req, res){
-    console.log('sei dentro la bacheca')
+function getList(req, res) {
+
     res.json(posts)
 }
 // SHOW
-function getById (req, res){
+function getById(req, res) {
     console.log('stai prendendo l/oggetto ' + req.params.id)
     const id = parseInt(req.params.id);
     const resultId = posts.find((element) => element.id === id);
@@ -18,43 +18,38 @@ function getById (req, res){
             status: 404,
             error: "Not Found",
             message: "Post non trovato"
-         });
+        });
     }
 
     res.json(resultId)
 }
 
-
 // STORE
-function insert (req, res){
+function insert(req, res) {
     const newId = posts[posts.length - 1].id + 1;
     const newPost = {
-        
-        id:  newId,
+
+        id: newId,
         title: req.body.title,
-        content:req.body.content,
+        content: req.body.content,
         // image: req.body.image,
         tags: req.body.tags
     }
-    
     posts.push(newPost)
-    console.log(posts)
-
     res.status(201).json(newPost);
 }
 
-
 //UPDATE
-function update (req, res){
+function update(req, res) {
     const id = parseInt(req.params.id);
     const resultId = posts.find((element) => element.id === id);
-    
+
     if (!resultId) {
         return res.status(404).json({
             status: 404,
             error: "Not Found",
             message: "Post non trovato"
-         });
+        });
     }
 
     resultId.title = req.body.title
@@ -62,16 +57,14 @@ function update (req, res){
     // post.image= req.body.image
     resultId.tags = req.body.tags
 
-    console.log(posts)
     res.json({
         message: `Hai modificato con successo il post con ID: ${id}`,
-        updatedPosts: resultId 
+        updatedPosts: resultId
     })
 }
 
-
 //DELETE
-function destroy (req, res){
+function destroy(req, res) {
 
     const id = parseInt(req.params.id);
     const index = posts.findIndex((element) => element.id === id);
@@ -81,12 +74,10 @@ function destroy (req, res){
             status: 404,
             error: "Not Found",
             message: "Post non trovato"
-         });
+        });
     }
 
-
     posts.splice(index, 1);
-    console.log(posts);
     res.json({
         status: "approvato",
         message: `Hai eliminato con successo il post con ID: ${id}`,
@@ -94,4 +85,4 @@ function destroy (req, res){
     });
 }
 
-module.exports = {getList, getById, insert, update, destroy}
+module.exports = { getList, getById, insert, update, destroy }
