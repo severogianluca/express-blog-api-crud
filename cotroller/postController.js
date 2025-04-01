@@ -1,4 +1,5 @@
 const posts = require ("../data/postsList")
+const notFound = require("../middleweres/errorNotFound")
 
 
 // INDEX
