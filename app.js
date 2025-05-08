@@ -3,9 +3,8 @@ const express = require('express');
 const app = express();
 const port = 3500;
 const homeRouter = require('./routers/post');
-const notFound = require('./middleweres/errorNotFound');
-const errorsHandler = require('./middleweres/errorHandlers');
-
+const notFound = require('./middleweres/errorNotFound')
+const errorsHandler = require('./middleweres/errorHandlers')
 
 //mi permette di poter far visualizzare gli elementi
 app.use(express.json())
